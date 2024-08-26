@@ -8,6 +8,12 @@
     /* Color Styles */
     --primary-color: #419059;
     --black: #000000;
+    --white: #ffffff;
+
+    /* Gradients */
+    --itori-gradients: linear-gradient(to top, #5C3F32, rgba(0,0,0,0));
+    --kumowrite-gradients: linear-gradient(to top, #647BAD, rgba(0,0,0,0));
+    --sti-gradients: linear-gradient(to top, #CBC743, rgba(0,0,0,0));
 }
 
 @font-face {
@@ -17,8 +23,25 @@
     font-style: normal;
 }
 
+
+
 body {
+
     color: var(--black);
+
+    padding: 0;
+    margin: 0;
+
+    overflow-x: hidden;
+}
+
+section {
+    margin: 4rem 6rem 4rem 6rem;
+}
+
+h1, h2, h3, p {
+    padding: 0;
+    margin: 0;
 }
 
 h1 {
@@ -33,6 +56,43 @@ h3 {
     font: var(--header-3);
 }
 
-p {
+p, .paragraph-emb {
     font: var(--paragraph);
+}
+
+button {
+    border: none;
+    background: none;
+    border-radius: 100rem;
+
+    font: var(--paragraph);
+}
+
+/* Custom Universals */
+
+.container-h {
+    display: flex;
+    box-sizing: border-box;
+}
+
+.container-v {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.gap4rem {
+    gap: 4rem;
+}
+
+.gap3rem {
+    gap: 3rem;
+}
+
+.gap2rem {
+    gap: 2rem;
+}
+
+.gap0-5rem {
+    gap: 0.5rem;
 }

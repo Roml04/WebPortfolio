@@ -1,0 +1,183 @@
+/* Universals */
+
+.icon {
+    aspect-ratio: 1/1;
+    width: 2rem;
+    height: 2rem;
+}
+
+.icon-small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.profile-pic {
+    aspect-ratio: 1/1;
+    width: 40%;
+    border-radius: 100%;
+    object-fit: cover;
+    object-position: 0 10%;
+}
+
+/* HomePage Specifics */
+
+
+/* HEADER */
+.portfolio-header {
+    justify-content: flex-end;
+    gap: 2rem;
+
+    margin: 2rem 6rem 0 6rem;
+}
+
+.contacts-container {
+    justify-content: center;
+    align-items: center;
+
+    gap: 0.5rem;
+}
+
+/* INTRO SECTION */
+.intro-section {
+
+}
+
+.slogan-container {
+    width: 40%;
+}
+
+.line-container {
+    align-items: flex-end;
+}
+
+.calltoaction-btn {
+    justify-content: center;
+    align-items: center;
+    
+    width: fit-content;
+    padding: 1em 2em;
+
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.img-container {
+    width: 50%;
+    position: relative;
+}
+
+.img-container > img {
+    position: absolute;
+    width: 145%;
+}
+
+.img1 {
+    top: 40%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+}
+
+.img2 {
+    top: 60%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+}
+
+.img3 {
+    top: 80%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+}
+
+/* PROJECTS SECTION */
+.projects-section {
+    margin: 4rem 0;
+
+    /* position: relative; */
+}
+
+.projects-section-title {
+    padding: 0 6rem;
+}
+
+.project-carousell {
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.project-card {
+    aspect-ratio: 1.7/1;
+    background-size: cover;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    position: relative;
+
+    padding: 2em;
+}
+
+.project-card::before {
+    position: absolute;
+
+    content: "";
+    inset: 0;
+}
+
+.project-card > .title, .link {
+    color: var(--white);
+}
+
+.centered {
+    width: 65%;
+}
+
+.project-card:not(.centered) {
+    width: 50%;
+}
+
+
+
+.itori-card {
+    background-image: url("./assets/images/Itori-HomePage-Front.png");
+}
+
+.itori-card::before {
+    position: absolute;
+    inset: 0;
+    background: var(--itori-gradients);
+}
+
+.kumowrite-card {
+    background-image: url("./assets/images/KumoWrite-HomePage-Front.jpg");
+}
+
+.kumowrite-card::before {
+    position: absolute;
+    inset: 0;
+    background: var(--kumowrite-gradients);
+}
+
+.sti-card {
+    background-image: url("./assets/images/stipromotionalWebpage-Front.png");
+}
+
+.sti-card::before {
+    position: absolute;
+    inset: 0;
+
+    background: var(--sti-gradients);
+}
+
+.title, .link {
+    isolation: isolate;
+}
+
+/* ABOUT ME SECTION */
+.aboutme-section {
+
+}
+
+.
