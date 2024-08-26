@@ -1,0 +1,38 @@
+:root {
+    /* Text Styles */
+    --header-1: bold 5rem 'Consolas', sans-serif;
+    --header-2: bold 4rem 'Consolas', sans-serif;
+    --header-3: bold 2rem 'Consolas', sans-serif;
+    --paragraph: 1.5rem 'Consolas', sans-serif;
+    
+    /* Color Styles */
+    --primary-color: #419059;
+    --black: #000000;
+}
+
+@font-face {
+    font-family: 'Consolas';
+    src: url("./assets/fonts/CONSOLA.TTF") format('TTF');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    color: var(--black);
+}
+
+h1 {
+    font: var(--header-1);
+}
+
+h2 {
+    font: var(--header-2);
+}
+
+h3 {
+    font: var(--header-3);
+}
+
+p {
+    font: var(--paragraph);
+}
