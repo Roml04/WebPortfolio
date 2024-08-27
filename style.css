@@ -39,7 +39,7 @@ section {
     margin: 4rem 6rem 4rem 6rem;
 }
 
-h1, h2, h3, p {
+h1, h2, h3, p, a {
     padding: 0;
     margin: 0;
 }
@@ -56,8 +56,13 @@ h3 {
     font: var(--header-3);
 }
 
-p, .paragraph-emb {
+p, a, .paragraph-emb {
     font: var(--paragraph);
+}
+
+a {
+    text-decoration: none;
+    color: var(--black);
 }
 
 button {
@@ -81,6 +86,10 @@ button {
     box-sizing: border-box;
 }
 
+.gap6rem {
+    gap: 6rem;
+}
+
 .gap4rem {
     gap: 4rem;
 }
@@ -91,6 +100,10 @@ button {
 
 .gap2rem {
     gap: 2rem;
+}
+
+.gap1-5rem {
+    gap: 1.5rem;
 }
 
 .gap0-5rem {

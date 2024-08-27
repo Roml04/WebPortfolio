@@ -25,7 +25,6 @@
 /* HEADER */
 .portfolio-header {
     justify-content: flex-end;
-    gap: 2rem;
 
     margin: 2rem 6rem 0 6rem;
 }
@@ -38,9 +37,9 @@
 }
 
 /* INTRO SECTION */
-.intro-section {
+/* .intro-section {
 
-}
+} */
 
 .slogan-container {
     width: 40%;
@@ -63,52 +62,57 @@
 
 .img-container {
     width: 50%;
+}
+
+.img-pos-container {
+    height: 100%;
+    
     position: relative;
 }
 
-.img-container > img {
+.img-pos-container > img {
     position: absolute;
     width: 145%;
+
+    left: 10%;
 }
 
 .img1 {
-    top: 40%;
-    left: 65%;
-    transform: translate(-50%, -50%);
+    top: -5%;
 }
 
 .img2 {
-    top: 60%;
-    left: 65%;
-    transform: translate(-50%, -50%);
+    top: 15%;
 }
 
 .img3 {
-    top: 80%;
-    left: 65%;
-    transform: translate(-50%, -50%);
+    top: 35%;
 }
 
 /* PROJECTS SECTION */
 .projects-section {
     margin: 4rem 0;
-
-    /* position: relative; */
 }
 
 .projects-section-title {
-    padding: 0 6rem;
+    padding: 0 6rem; /*don't changed this to em*/
 }
 
-.project-carousell {
+.project-carousell, .carousell-pos-container {
     justify-content: center;
     align-items: center;
 }
 
 
+.carousell-pos-container {
+    width: 100%;
+    height: 100%;
+}
 
 .project-card {
     aspect-ratio: 1.7/1;
+
+    flex: 0 0 auto; /* does not allow the flex item to shrink or grow */
     background-size: cover;
 
     justify-content: space-between;
@@ -136,6 +140,8 @@
 
 .project-card:not(.centered) {
     width: 50%;
+
+    /* display: none; */
 }
 
 
@@ -171,13 +177,25 @@
     background: var(--sti-gradients);
 }
 
-.title, .link {
+.link-container {
+    justify-content: center;
+    align-items: center;
+}
+
+.title, .link, .link-icon {
     isolation: isolate;
 }
 
 /* ABOUT ME SECTION */
-.aboutme-section {
+/* .aboutme-section {
 
+} */
+
+.profilepic-name-container {
+    justify-content: center;
+    align-items: center;
 }
 
-.
+.aboutme-profilepic {
+    width: 20%;
+}
