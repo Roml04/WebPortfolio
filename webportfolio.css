@@ -6,6 +6,17 @@
     height: 2rem;
 }
 
+.contacts-container {
+    padding: 0.5em 1em;
+    border-radius: 10rem;
+    
+    transition: background-color 250ms;
+}
+
+.contacts-container:hover {
+    background-color: var(--grey);
+}
+
 .icon-small {
     width: 1rem;
     height: 1rem;
@@ -17,10 +28,15 @@
     border-radius: 100%;
     object-fit: cover;
     object-position: 0 10%;
+
+    transition: transform 500ms;
+}
+
+.profile-pic:hover {
+    transform: scale(110%);
 }
 
 /* HomePage Specifics */
-
 
 /* HEADER */
 .portfolio-header {
@@ -36,10 +52,10 @@
     gap: 0.5rem;
 }
 
-/* INTRO SECTION */
-/* .intro-section {
 
-} */
+
+/* INTRO SECTION */
+
 
 .slogan-container {
     width: 40%;
@@ -58,7 +74,16 @@
 
     background-color: var(--primary-color);
     color: var(--white);
+
+    transition: background-color 250ms;
 }
+
+/* Transition */
+
+button:hover {
+    background-color: var(--primary-color-active);
+}
+
 
 .img-container {
     width: 50%;
@@ -75,6 +100,16 @@
     width: 145%;
 
     left: 10%;
+
+    transition: transform 500ms;
+
+    clip-path: polygon(52.19% 100%, 100% 52.92%, 100% 45.15%, 51.63% 0%, 47.81% 0%, 0% 48.04%, 0% 54.36%, 47.53% 99.76%);
+}
+
+/* Transition */
+
+.img-pos-container > img:hover {
+    transform: scale(110%);
 }
 
 .img1 {
@@ -121,17 +156,53 @@
     position: relative;
 
     padding: 2em;
+
+    transition: background-position 500ms;
 }
+
+/* Transition */
+
+.project-card:hover {
+    background-position: 100%;
+}
+
 
 .project-card::before {
     position: absolute;
-
+    
     content: "";
     inset: 0;
+
+    opacity: 0%;
+    transition: opacity 500ms;
 }
 
-.project-card > .title, .link {
+/* Transition */
+
+.project-card:hover::before {
+    opacity: 100%;
+}
+
+
+.card-elements {
+    opacity: 0%;
+    
     color: var(--white);
+    isolation: isolate;
+
+    transition: opacity 250ms;
+}
+
+/* Transition */
+
+.project-link:hover {
+    text-decoration: underline;
+}
+
+/* Transition */
+
+.project-card:hover .card-elements { /* transitions when cursor hovers the parent container */
+    opacity: 100%;
 }
 
 .centered {
@@ -140,14 +211,13 @@
 
 .project-card:not(.centered) {
     width: 50%;
-
-    /* display: none; */
 }
 
 
 
+
 .itori-card {
-    background-image: url("./assets/images/Itori-HomePage-Front.png");
+    background-image: url("./assets/images/Itori-HomePage-Front.webp");
 }
 
 .itori-card::before {
@@ -157,7 +227,7 @@
 }
 
 .kumowrite-card {
-    background-image: url("./assets/images/KumoWrite-HomePage-Front.jpg");
+    background-image: url("./assets/images/KumoWrite-HomePage-Front.webp");
 }
 
 .kumowrite-card::before {
@@ -167,7 +237,7 @@
 }
 
 .sti-card {
-    background-image: url("./assets/images/stipromotionalWebpage-Front.png");
+    background-image: url("./assets/images/stipromotionalWebpage-Front.webp");
 }
 
 .sti-card::before {
@@ -182,20 +252,37 @@
     align-items: center;
 }
 
-.title, .link, .link-icon {
-    isolation: isolate;
-}
-
 /* ABOUT ME SECTION */
-/* .aboutme-section {
-
-} */
 
 .profilepic-name-container {
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
 .aboutme-profilepic {
-    width: 20%;
+    width: 40%;
+}
+
+.aboutme-icon {
+    transition: transform 250ms;
+}
+
+/* Transition */
+
+.aboutme-icon:hover {
+    transform: scale(125%);
+}
+
+/* hello there */
+
+.dont-click {
+    transition: color 250ms;
+}
+
+.dont-click:hover {
+    color: var(--primary-color);
+}
+
+.body2 {
+    background-image: url("./assets/images/Itori-img-74.jpg");
 }
