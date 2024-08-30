@@ -26,6 +26,10 @@
     font-style: normal;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 html, body {
     overflow-x: hidden;
 }
@@ -114,3 +118,4 @@ button {
 .gap0-5rem {
     gap: 0.5rem;
 }
+

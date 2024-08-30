@@ -260,7 +260,7 @@ button:hover {
 }
 
 .aboutme-profilepic {
-    width: 40%;
+    width: 20%;
 }
 
 .aboutme-icon {
@@ -271,18 +271,4 @@ button:hover {
 
 .aboutme-icon:hover {
     transform: scale(125%);
-}
-
-/* hello there */
-
-.dont-click {
-    transition: color 250ms;
-}
-
-.dont-click:hover {
-    color: var(--primary-color);
-}
-
-.body2 {
-    background-image: url("./assets/images/Itori-img-74.jpg");
 }
