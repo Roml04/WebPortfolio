@@ -1,3 +1,9 @@
+/* For Dev */
+
+/* * {
+    outline: auto;
+} */
+
 /* Universals */
 
 .icon {
@@ -30,6 +36,7 @@
     object-position: 0 10%;
 
     transition: transform 500ms;
+    min-width: 18rem;
 }
 
 .profile-pic:hover {
@@ -260,7 +267,7 @@ button:hover {
 }
 
 .aboutme-profilepic {
-    width: 20%;
+    /* width: 20%; */
 }
 
 .aboutme-icon {
