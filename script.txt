@@ -1,0 +1,132 @@
+// Place temporary JS codes here.
+
+// Carousel animation
+
+rightCard.addEventListener('click', (e) => {
+
+    console.log(e.target);
+    shiftCardsToRight();
+
+});
+
+leftCard.addEventListener('click', (e) => {
+    
+    console.log(e.target);
+    shiftCardsToLeft();
+    
+});
+
+function calculatePosition (isRightSide) {
+
+    // const currentCard = cardSetContainer.querySelector('.active');
+    const amountToCenter = currentCard.getBoundingClientRect().left;
+    const amountToMove = isRightSide ? currentCard.nextElementSibling.getBoundingClientRect().left : currentCard.previousElementSibling.getBoundingClientRect().left;
+
+    return [amountToMove, amountToCenter];
+
+};
+
+function shiftCardsToRight () {
+    
+    const [amountToMove, amountToCenter] = calculatePosition(true);
+    cardSetContainer.style.transform = `translateX(-${amountToMove - amountToCenter}px)`;
+    
+    currentCard = moveClasses(true);
+
+};
+
+function shiftCardsToLeft () {
+
+    const [amountToMove, amountToCenter] = calculatePosition(false);
+    cardSetContainer.style.transform = `translateX(${amountToCenter - amountToMove}px)`;
+
+    currentCard = moveClasses(false);
+
+};
+
+
+let centerCard = cardSetContainer.querySelector('.active');
+let rightCard = centerCard.nextElementSibling;
+let leftCard = centerCard.previousElementSibling;
+
+console.log("centerCard", centerCard);
+console.log("rightCard", rightCard);
+console.log("leftCard", leftCard);
+
+rightCard.addEventListener('click', (e) => {
+
+    console.log(e.target);
+    shiftCardsToRight();
+
+});
+
+leftCard.addEventListener('click', (e) => {
+    
+    console.log(e.target);
+    shiftCardsToLeft();
+    
+});
+
+function calculatePosition (isRightSide) {
+
+    const amountToCenter = centerCard.getBoundingClientRect().left;
+    const amountToMove = isRightSide ? centerCard.nextElementSibling.getBoundingClientRect().left : centerCard.previousElementSibling.getBoundingClientRect().left;
+
+    return [amountToMove, amountToCenter];
+
+};
+
+function shiftCardsToRight () {
+    
+    const [amountToMove, amountToCenter] = calculatePosition(true);
+    cardSetContainer.style.transform = `translateX(-${amountToMove - amountToCenter}px)`;
+    
+    centerCard = moveClasses(true);
+
+    updateListeners(centerCard);
+
+    console.log("rightcard", rightCard);
+    console.log("leftcard", leftCard);
+
+};
+
+function shiftCardsToLeft () {
+
+    const [amountToMove, amountToCenter] = calculatePosition(false);
+    cardSetContainer.style.transform = `translateX(${amountToCenter - amountToMove}px)`;
+
+    centerCard = moveClasses(false);
+
+    updateListeners(centerCard);
+
+};
+
+// ---
+
+// Move Class Function
+
+function moveClasses (isTowardsRight) {
+
+    if (isTowardsRight) {
+        centerCard.nextElementSibling.classList.add('active');
+        centerCard.classList.remove('active');
+
+    } else {
+        centerCard.previousElementSibling.classList.add('active');
+        centerCard.classList.remove('active');    
+    }
+
+    const newCurrentCard = cardSetContainer.querySelector('.active');
+
+    return newCurrentCard;
+    
+};
+
+// ---
+
+// Update Listeners
+
+function updateListeners (centerCard) {
+    rightCard = centerCard.nextElementSibling;
+    leftCard = centerCard.previousElementSibling;
+};
