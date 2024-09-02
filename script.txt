@@ -1,132 +1,172 @@
 // Place temporary JS codes here.
 
-// Carousel animation
 
-rightCard.addEventListener('click', (e) => {
+// Scroll to Section
 
-    console.log(e.target);
-    shiftCardsToRight();
+const scrollToButton = document.getElementById('scrollToSection-btn');
+const targetSection = document.getElementById('target-section');
 
-});
+scrollToButton.addEventListener('click', () => {
 
-leftCard.addEventListener('click', (e) => {
-    
-    console.log(e.target);
-    shiftCardsToLeft();
-    
-});
-
-function calculatePosition (isRightSide) {
-
-    // const currentCard = cardSetContainer.querySelector('.active');
-    const amountToCenter = currentCard.getBoundingClientRect().left;
-    const amountToMove = isRightSide ? currentCard.nextElementSibling.getBoundingClientRect().left : currentCard.previousElementSibling.getBoundingClientRect().left;
-
-    return [amountToMove, amountToCenter];
-
-};
-
-function shiftCardsToRight () {
-    
-    const [amountToMove, amountToCenter] = calculatePosition(true);
-    cardSetContainer.style.transform = `translateX(-${amountToMove - amountToCenter}px)`;
-    
-    currentCard = moveClasses(true);
-
-};
-
-function shiftCardsToLeft () {
-
-    const [amountToMove, amountToCenter] = calculatePosition(false);
-    cardSetContainer.style.transform = `translateX(${amountToCenter - amountToMove}px)`;
-
-    currentCard = moveClasses(false);
-
-};
-
-
-let centerCard = cardSetContainer.querySelector('.active');
-let rightCard = centerCard.nextElementSibling;
-let leftCard = centerCard.previousElementSibling;
-
-console.log("centerCard", centerCard);
-console.log("rightCard", rightCard);
-console.log("leftCard", leftCard);
-
-rightCard.addEventListener('click', (e) => {
-
-    console.log(e.target);
-    shiftCardsToRight();
+    targetSection.scrollIntoView({
+        behavior: 'smooth'
+    })
 
 });
 
-leftCard.addEventListener('click', (e) => {
-    
-    console.log(e.target);
-    shiftCardsToLeft();
-    
-});
+// Carousel Functionality/Animation | Total Scrapped Code: 7 | Updated: Sept 2, 2024
 
-function calculatePosition (isRightSide) {
+const cardsDataArray = [
+    {
+        'image': 'url here',
+        'title': 'KumoWrite',
+        'dataset': 'data-active',
+        'link': 'https://www.figma.com/design/6KkdTytUOkV54NlD5lmeDb/KumoWrite-Project?node-id=0-1&t=co0ZFjmIidh3MAwD-1'
+    },
+    {
+        'image': 'url here',
+        'title': 'Itori',
+        'dataset': '',
+        'link': 'https://www.figma.com/design/Sip3Zv93lDh2m02T8DkZFr/Itori---Coffee-Shop?node-id=0-1&t=9iVk0vMv3Pf8YW5u-1'
+    },
+    {
+        'image': 'url here',
+        'title': 'STI',
+        'dataset': '',
+        'link': 'https://www.figma.com/design/CQoIHKCYeXgpcXdxoekJLH/WEBPROG---Promotion-Page?node-id=0-1&t=FgSDYwoNZiHTQOnd-1'
+    },
+    {
+        'image': 'url here',
+        'title': 'STI',
+        'dataset': '',
+        'link': 'https://www.figma.com/design/CQoIHKCYeXgpcXdxoekJLH/WEBPROG---Promotion-Page?node-id=0-1&t=FgSDYwoNZiHTQOnd-1'
+    }
+];
 
-    const amountToCenter = centerCard.getBoundingClientRect().left;
-    const amountToMove = isRightSide ? centerCard.nextElementSibling.getBoundingClientRect().left : centerCard.previousElementSibling.getBoundingClientRect().left;
+const cardSetContainer = document.querySelector('.carousel-cards-container');
 
-    return [amountToMove, amountToCenter];
+renderProjectHTML();
 
-};
+function renderProjectHTML () {
 
-function shiftCardsToRight () {
-    
-    const [amountToMove, amountToCenter] = calculatePosition(true);
-    cardSetContainer.style.transform = `translateX(-${amountToMove - amountToCenter}px)`;
-    
-    centerCard = moveClasses(true);
+    let newHTML = ``;
 
-    updateListeners(centerCard);
+    for (let i = 0; i <cardsDataArray.length; i++) {
+        const injectedHTMLcontents = `
+            <li class="container-h project-card ${cardsDataArray[i].title.toLowerCase()}-card" ${cardsDataArray[i].dataset}>          
+                <h3 class="title card-elements">.${cardsDataArray[i].title}</h3>
+                <div class="link-container container-h gap0-5rem">
+                    <a class="project-link card-elements" target="_blank" href="${cardsDataArray[i].link}" class="link">
+                        Visit ${cardsDataArray[i].title}
+                        <img class="icon-small link-icon" src="./assets/icons/redirect-icon.svg" alt="">
+                    </a>
+                </div>
+            </li>`;
 
-    console.log("rightcard", rightCard);
-    console.log("leftcard", leftCard);
-
-};
-
-function shiftCardsToLeft () {
-
-    const [amountToMove, amountToCenter] = calculatePosition(false);
-    cardSetContainer.style.transform = `translateX(${amountToCenter - amountToMove}px)`;
-
-    centerCard = moveClasses(false);
-
-    updateListeners(centerCard);
-
-};
-
-// ---
-
-// Move Class Function
-
-function moveClasses (isTowardsRight) {
-
-    if (isTowardsRight) {
-        centerCard.nextElementSibling.classList.add('active');
-        centerCard.classList.remove('active');
-
-    } else {
-        centerCard.previousElementSibling.classList.add('active');
-        centerCard.classList.remove('active');    
+        newHTML += injectedHTMLcontents;
     }
 
-    const newCurrentCard = cardSetContainer.querySelector('.active');
+    cardSetContainer.innerHTML = newHTML;
+}
 
-    return newCurrentCard;
+const navButtons = document.querySelectorAll('[data-carousel-button]');
+let activeSlide = document.querySelector('[data-active]');
+
+
+
+function translateCarouseltoRight() {
+
+    console.log('Right: Before Guard===============');
+    if (!activeSlide.nextElementSibling) return; // exits if there are no next element
+    console.log('Right: After Guard===============');
+
+    const nextElement = activeSlide.nextElementSibling; 
+
+    console.log("Right: nextElement", nextElement);
+    console.log("Right: activeSlide", activeSlide);
+
+    const nextElementLeft = nextElement.getBoundingClientRect().left;
+    const currentElementRight = activeSlide.getBoundingClientRect().right;
     
-};
+    const rowGap = nextElementLeft - currentElementRight;            
+    const slideWidth = activeSlide.getBoundingClientRect().width;
+    
+    totalTranslationRight += slideWidth + rowGap; // accumulates the translation from the previous clicks
 
-// ---
+    console.log("Right: rowGap", rowGap);
+    console.log("Right: slideWidth", slideWidth);
+    console.log("Right: slideWidth + rowGap:", slideWidth + rowGap);
 
-// Update Listeners
+    cardSetContainer.style.transform = `translateX(-${totalTranslationRight}px)`; // translates the carousel container
+    
+    console.log("Right: totalTranslationRight", totalTranslationRight);
 
-function updateListeners (centerCard) {
-    rightCard = centerCard.nextElementSibling;
-    leftCard = centerCard.previousElementSibling;
-};
+    activeSlide.removeAttribute('data-active');
+    nextElement.setAttribute('data-active', 'true');
+
+    activeSlide = nextElement;
+
+    console.log("Right: newActiveSlide", activeSlide);
+    console.log('Right: successful translation===============');
+
+}
+
+function translateCarouseltoLeft() {
+
+    console.log('Left: Before Guard===============');
+    if (!activeSlide.previousElementSibling) return; // exits if there are no next element - SOMEHOW NOT WORKING
+    console.log('Left: After Guard===============');
+
+    const prevElement = activeSlide.previousElementSibling; 
+
+    console.log("Left: prevElement", prevElement);
+    console.log("Left: activeSlide", activeSlide);
+
+    const prevElementRight = prevElement.getBoundingClientRect().right;
+    const currentElementLeft = activeSlide.getBoundingClientRect().left;
+    
+    const rowGap = prevElementRight - currentElementLeft;            
+    const slideWidth = activeSlide.getBoundingClientRect().width;
+    
+    totalTranslationLeft += slideWidth + rowGap; // accumulates the translation from the previous clicks
+
+    
+    console.log("Left: rowGap", rowGap);
+    console.log("Left: slideWidth", slideWidth);
+    console.log("Right: slideWidth + rowGap:", slideWidth + rowGap);
+    console.log("Left: totalTranslationLeft", totalTranslationLeft);
+
+    // cardSetContainer.style.transform = `translateX(${totalTranslationLeft}px)`; // translates the carousel container
+    cardSetContainer.style.transform = `translateX(${totalTranslationLeft}px)`; // translates the carousel container
+    
+    console.log("Left: totalTranslationLeft", totalTranslationLeft);
+
+    activeSlide.removeAttribute('data-active');
+    prevElement.setAttribute('data-active', 'true');
+
+    activeSlide = prevElement;
+
+    console.log("Left: newActiveSlide", activeSlide);
+    console.log('Left: successful translation===============');
+}
+
+let totalTranslationRight = 0;
+let totalTranslationLeft = 0;
+
+navButtons.forEach(button => {
+
+    button.addEventListener('click', e => {
+        
+        if (e.target.dataset.carouselButton === 'next') {
+
+            translateCarouseltoRight();
+
+        } else if (e.target.dataset.carouselButton === 'prev') {
+            
+            translateCarouseltoLeft();
+
+        }
+
+    });
+
+});

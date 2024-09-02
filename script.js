@@ -11,27 +11,26 @@ scrollToButton.addEventListener('click', () => {
 
 });
 
+// Carousel Functionality/Animation | Total Scrapped Code Ideas: 7
 
-
-// Carousel Functionality/Animation | Total Scrapped Code: 4
-
+// data of the projects
 const cardsDataArray = [
     {
         'image': 'url here',
         'title': 'KumoWrite',
-        'class': '',
+        'dataset': 'data-active',
         'link': 'https://www.figma.com/design/6KkdTytUOkV54NlD5lmeDb/KumoWrite-Project?node-id=0-1&t=co0ZFjmIidh3MAwD-1'
     },
     {
         'image': 'url here',
         'title': 'Itori',
-        'class': 'active',
+        'dataset': '',
         'link': 'https://www.figma.com/design/Sip3Zv93lDh2m02T8DkZFr/Itori---Coffee-Shop?node-id=0-1&t=9iVk0vMv3Pf8YW5u-1'
     },
     {
         'image': 'url here',
         'title': 'STI',
-        'class': '',
+        'dataset': '',
         'link': 'https://www.figma.com/design/CQoIHKCYeXgpcXdxoekJLH/WEBPROG---Promotion-Page?node-id=0-1&t=FgSDYwoNZiHTQOnd-1'
     }
 ];
@@ -44,9 +43,10 @@ function renderProjectHTML () {
 
     let newHTML = ``;
 
+    // renders the cards with the data from the cardsDataArray
     for (let i = 0; i <cardsDataArray.length; i++) {
         const injectedHTMLcontents = `
-            <li class="container-h project-card ${cardsDataArray[i].title.toLowerCase()}-card ${cardsDataArray[i].class}">          
+            <li class="container-h project-card ${cardsDataArray[i].title.toLowerCase()}-card" ${cardsDataArray[i].dataset}>          
                 <h3 class="title card-elements">.${cardsDataArray[i].title}</h3>
                 <div class="link-container container-h gap0-5rem">
                     <a class="project-link card-elements" target="_blank" href="${cardsDataArray[i].link}" class="link">
@@ -56,76 +56,83 @@ function renderProjectHTML () {
                 </div>
             </li>`;
 
+        // accumulates the injected HTML content
         newHTML += injectedHTMLcontents;
     }
 
     cardSetContainer.innerHTML = newHTML;
 }
 
-// carousel animation goes here
+const navButtons = document.querySelectorAll('[data-carousel-button]');
+let activeSlide = document.querySelector('[data-active]');
 
-// Event delegation thingy
+function translateCarouseltoRight() {
 
-let centerCard = cardSetContainer.querySelector('.active');
+    if (!activeSlide.nextElementSibling) return; // exits if there are no next element
 
-cardSetContainer.addEventListener('click', (e) => {
+    const nextElement = activeSlide.nextElementSibling; 
 
-    const clickedCard = e.target.closest('li');
+    // calculates for the distance to which the carousel will be translated to
+    const nextElementLeft = nextElement.getBoundingClientRect().left;
+    const currentElementRight = activeSlide.getBoundingClientRect().right;
+    const rowGap = nextElementLeft - currentElementRight;            
+    const slideWidth = activeSlide.getBoundingClientRect().width;
+    
+    totalTranslationRight += slideWidth + rowGap; // accumulates the translation from the previous clicks
 
-    if(!clickedCard || clickedCard === centerCard) return;
+    cardSetContainer.style.transform = `translateX(-${totalTranslationRight}px)`; // translates the carousel container to right
 
-    if(clickedCard === centerCard.nextElementSibling) {
-        shiftCardsToRight();
-    } else if (clickedCard === centerCard.previousElementSibling) {
-        shiftCardsToLeft();
-    }
+    // updates the data-active to the new active slide
+    activeSlide.removeAttribute('data-active');
+    nextElement.setAttribute('data-active', 'true');
+
+    activeSlide = nextElement;
+
+}
+
+function translateCarouseltoLeft() {
+
+    if (!activeSlide.previousElementSibling) return; // exits if there are no prevous element
+
+    const prevElement = activeSlide.previousElementSibling; 
+
+    // calculates for the distance to which the carousel will be translated to
+    const prevElementRight = prevElement.getBoundingClientRect().right;
+    const currentElementLeft = activeSlide.getBoundingClientRect().left;
+    const rowGap = prevElementRight - currentElementLeft;            
+    const slideWidth = activeSlide.getBoundingClientRect().width;
+    
+    totalTranslationLeft += slideWidth + rowGap; // accumulates the translation from the previous clicks
+
+    cardSetContainer.style.transform = `translateX(${totalTranslationLeft}px)`; // translates the carousel container to left
+
+    // updates the data-active to the new active slide
+    activeSlide.removeAttribute('data-active');
+    prevElement.setAttribute('data-active', 'true');
+
+    activeSlide = prevElement;
+
+}
+
+let totalTranslationRight = 0;
+let totalTranslationLeft = 0;
+
+// puts an event listener in each button
+navButtons.forEach(button => {
+
+    button.addEventListener('click', e => {
+        
+        // checks whether the targeted element has an data attribute that has a 'next' or 'prev' value
+        if (e.target.dataset.carouselButton === 'next') {
+
+            translateCarouseltoRight();
+
+        } else if (e.target.dataset.carouselButton === 'prev') {
+            
+            translateCarouseltoLeft();
+
+        }
+
+    });
+
 });
-
-function calculatePosition (isRightSide) {
-
-    let amountToCenter = 0;
-    let amountToMove = 0;
-    
-    try {
-
-        console.log("centerCard at calculatePos", centerCard)
-        amountToCenter = centerCard.getBoundingClientRect().left;
-        amountToMove = isRightSide ? centerCard.nextElementSibling.getBoundingClientRect().left : centerCard.previousElementSibling.getBoundingClientRect().left;
-
-    } catch (message) {
-        console.log('something went wrong');
-    }
-    return [amountToMove, amountToCenter];
-
-};
-
-function shiftCardsToRight () {
-    
-    const [amountToMove, amountToCenter] = calculatePosition(true);
-    cardSetContainer.style.transform = `translateX(-${amountToMove - amountToCenter}px)`;
-    
-    centerCard.nextElementSibling.classList.add('active');
-    centerCard.classList.remove('active');
-
-    centerCard = cardSetContainer.querySelector('.active');
-    // centerCard = moveClasses(true);
-
-    // updateListeners(centerCard);
-
-};
-
-function shiftCardsToLeft () {
-
-    const [amountToMove, amountToCenter] = calculatePosition(false);
-    cardSetContainer.style.transform = `translateX(${amountToCenter - amountToMove}px)`;
-
-    centerCard.previousElementSibling.classList.add('active');
-    centerCard.classList.remove('active');
-
-    centerCard = cardSetContainer.querySelector('.active');
-
-    // centerCard = moveClasses(false);
-
-    // updateListeners(centerCard);
-
-};
