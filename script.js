@@ -59,7 +59,7 @@ function renderProjectHTML () {
         // accumulates the injected HTML content
         newHTML += injectedHTMLcontents;
     }
-
+    
     cardSetContainer.innerHTML = newHTML;
 }
 
@@ -75,10 +75,12 @@ function translateCarouseltoRight() {
     // calculates for the distance to which the carousel will be translated to
     const nextElementLeft = nextElement.getBoundingClientRect().left;
     const currentElementRight = activeSlide.getBoundingClientRect().right;
-    const rowGap = nextElementLeft - currentElementRight;            
+    const rowGapRight = nextElementLeft - currentElementRight;            
     const slideWidth = activeSlide.getBoundingClientRect().width;
     
-    totalTranslationRight += slideWidth + rowGap; // accumulates the translation from the previous clicks
+    console.log('activeslide:', activeSlide);
+
+    totalTranslationRight += slideWidth + rowGapRight; // accumulates the translation from the previous clicks
 
     cardSetContainer.style.transform = `translateX(-${totalTranslationRight}px)`; // translates the carousel container to right
 
@@ -87,6 +89,7 @@ function translateCarouseltoRight() {
     nextElement.setAttribute('data-active', 'true');
 
     activeSlide = nextElement;
+    console.log('activeslide:', activeSlide);
 
 }
 
@@ -99,10 +102,16 @@ function translateCarouseltoLeft() {
     // calculates for the distance to which the carousel will be translated to
     const prevElementRight = prevElement.getBoundingClientRect().right;
     const currentElementLeft = activeSlide.getBoundingClientRect().left;
-    const rowGap = prevElementRight - currentElementLeft;            
+    const rowGapLeft = Math.abs(prevElementRight - currentElementLeft);            
     const slideWidth = activeSlide.getBoundingClientRect().width;
+
+    console.log('activeslide:', activeSlide);
+    console.log('prevelementRight:', prevElementRight);
+    console.log('currentElementLeft:', currentElementLeft);
+    console.log('rowGapLeft:', rowGapLeft);
+    console.log('slideWidth:', slideWidth);
     
-    totalTranslationLeft += slideWidth + rowGap; // accumulates the translation from the previous clicks
+    totalTranslationLeft += slideWidth + rowGapLeft; // accumulates the translation from the previous clicks
 
     cardSetContainer.style.transform = `translateX(${totalTranslationLeft}px)`; // translates the carousel container to left
 
@@ -112,27 +121,42 @@ function translateCarouseltoLeft() {
 
     activeSlide = prevElement;
 
+    console.log('activeslide:', activeSlide);
+
 }
 
-let totalTranslationRight = 0;
 let totalTranslationLeft = 0;
+let totalTranslationRight = 0;
+
+const prevButton = document.querySelector('[data-carousel-button-left]');
+const nextButton = document.querySelector('[data-carousel-button-right]');
+
+prevButton.addEventListener('click', e=> {
+    translateCarouseltoLeft();
+    console.log('totTransLeft:', totalTranslationLeft);
+});
+
+nextButton.addEventListener('click', e=> {
+    translateCarouseltoRight();
+    console.log('totTransRigh:', totalTranslationRight);
+});
 
 // puts an event listener in each button
-navButtons.forEach(button => {
+// navButtons.forEach(button => {
 
-    button.addEventListener('click', e => {
+//     button.addEventListener('click', e => {
         
-        // checks whether the targeted element has an data attribute that has a 'next' or 'prev' value
-        if (e.target.dataset.carouselButton === 'next') {
+//         // checks whether the targeted element has an data attribute that has a 'next' or 'prev' value
+//         if (e.target.dataset.carouselButton === 'next') {
 
-            translateCarouseltoRight();
+//             translateCarouseltoRight();
 
-        } else if (e.target.dataset.carouselButton === 'prev') {
+//         } else if (e.target.dataset.carouselButton === 'prev') {
             
-            translateCarouseltoLeft();
+//             translateCarouseltoRight();
 
-        }
+//         }
 
-    });
+//     });
 
-});
+// });
