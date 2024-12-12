@@ -105,9 +105,9 @@
 
         <h2 class="projects-section-title"><span class="paragraph-emb">02 </span>Projects</h2>
         
-            <div class="container-h project-carousell">
+            <div class="container-h project-carousel">
 
-                <div class="container-h carousell-pos-container gap1-5rem">
+                <div class="container-v carousel-cards-container gap1-5rem">
 
                     <div class="container-h project-card kumowrite-card">
                         
